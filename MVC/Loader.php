@@ -28,6 +28,7 @@ final class Loader
     public static function loadClass($class)
     {
         //echo '<pre>' . print_r(self::$namespaces, true) . '</pre>';
+
         foreach (self::$namespaces as $k => $v) {
             if (strpos($class, $k) === 0) {
                 $file = realpath(substr_replace(str_replace('\\', DIRECTORY_SEPARATOR, $class), $v, 0, strlen($k)) . '.php');
