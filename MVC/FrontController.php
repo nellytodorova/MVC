@@ -1,15 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of FrontController
- *
- * @author Nelly
- */
 namespace MVC;
 
 class FrontController
@@ -25,11 +14,13 @@ class FrontController
 
     }
 
-    public function getRouter() {
+    public function getRouter()
+    {
         return $this->router;
     }
 
-    public function setRouter(\MVC\Routers\IRouter $router) {
+    public function setRouter(\MVC\Routers\IRouter $router)
+    {
         $this->router = $router;
     }
 
@@ -65,6 +56,7 @@ class FrontController
             throw new \Exception('Default route missing', 500);
         }
 
+        $input = \MVC\InputData::getInstance();
         $_params = explode('/', $_uri);
 
         if ($_params[0]) {
@@ -73,6 +65,9 @@ class FrontController
             // if we don't have controller and method, we don't have params
             if ($_params[1]) {
                 $this->method = strtolower($_params[1]);
+                unset($_params[0],$_params[1]);
+                $input->setGet(array_values($_params));
+
             } else {
                 $this->method = $this->getDefaultMethod();
             }
@@ -91,10 +86,11 @@ class FrontController
             }
         }
 
-        //TODO fixed
-//        $f = $this->ns . '\\' . ucfirst($this->controller);
-//        $newController = new $f();
-//        $newController->{$this->method}();
+        $input->setPost($this->router->getPost());
+
+        $f = $this->ns . '\\' . ucfirst($this->controller);
+        $newController = new $f();
+        $newController->{$this->method}();
     }
 
     public function getDefaultController()

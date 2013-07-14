@@ -1,9 +1,4 @@
 <?php
-/**
- * Description of Loader
- *
- * @author Nelly
- */
 namespace MVC;
 
 final class Loader

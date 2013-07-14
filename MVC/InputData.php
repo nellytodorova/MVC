@@ -1,9 +1,4 @@
 <?php
-/**
- * Description of InputData
- *
- * @author Nelly
- */
 namespace MVC;
 
 class InputData
@@ -46,7 +41,7 @@ class InputData
      */
     public function hasGet($id)
     {
-        return array_key_exists($id, $this->_cookies);
+        return array_key_exists($id, $this->_get);
     }
 
     /**
@@ -56,7 +51,7 @@ class InputData
      */
     public function hasCookies($name)
     {
-        return array_key_exists($name , $this->_post);
+        return array_key_exists($name , $this->_cookies);
     }
 
     /**

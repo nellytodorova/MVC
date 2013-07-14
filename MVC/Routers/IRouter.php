@@ -1,12 +1,9 @@
 <?php
-/**
- *
- * @author Nelly
- */
 namespace MVC\Routers;
 
-interface IRouter {
+interface IRouter
+{
     public function getURI();
+    public function getPost();
 }
-
 ?>
